@@ -4,12 +4,9 @@ import axios from "axios";
 function* fetchTodos() {
   const res = yield axios
     .get("https://jsonplaceholder.typicode.com/todos")
-    .then(res => {
-      console.log(res);
-      return res.data;
-    });
+    .then(res => res.data);
 
-  yield put({ type: "TODOS_RECEIVED", res: res });
+  yield put({ type: "TODOS_RECEIVED", payload: res });
 }
 function* actionWatcher() {
   yield takeLatest("GET_TODOS", fetchTodos);
